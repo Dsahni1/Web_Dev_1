@@ -10,10 +10,17 @@ export default function MovieDetails() {
   const [user, setUser] = useState(null);
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState(localStorage.getItem('userEmail'));
+  const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedEmail = localStorage.getItem('userEmail');
+      setEmail(storedEmail);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchMovie = async (id) => {
